@@ -5,7 +5,7 @@ export const MarvelSreecn = () => {
     return (
 
 
-        <div>
+        <div className="container-fluid" >
 
             <h1>Marvel Screen</h1>
     
