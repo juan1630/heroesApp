@@ -13,7 +13,7 @@ export const DashBoardRoutes = () => {
             <div>
                 <Switch>
                     <Route exact path="/marvel" component={ MarvelSreecn }  />
-                    <Route exact path="/heroe/:heroeid" component={ HeroesScreen }  />
+                    <Route exact path="/hero/:heroeid" component={ HeroesScreen }  />
                     <Route exact path="/dc" component={ DcSreen }  />
                     <Redirect to="marvel" />
                 </Switch>
