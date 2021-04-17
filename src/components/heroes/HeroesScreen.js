@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import { Redirect, useParams } from 'react-router'
 import { getHeroesById } from '../../selectors/getHeroeById';
 
@@ -7,7 +7,9 @@ export const HeroesScreen = ({history}) => {
     //obtenemos los parametros de la url
     const {heroeid} =  useParams();
 
-    const hero = getHeroesById(heroeid);
+    // const hero = getHeroesById(heroeid);
+
+    const hero   = useMemo( ()=> getHeroesById(heroeid), [heroeid] );
 
     if(!hero){
         return <Redirect to="/" />
@@ -20,7 +22,8 @@ export const HeroesScreen = ({history}) => {
         characters,
         publisher,
     } = hero;
-
+    // el usememo es para procesos pesados
+    
     const hendleReturn = () => {
 
         if(history.length < 2){
@@ -34,7 +37,7 @@ export const HeroesScreen = ({history}) => {
     return (
         <div className="row mt-5" >
             <div className="col-md-4">
-                <img src={`../assets/${heroeid}.jpg`} className="img-thumbnail" alt="img" />
+                <img src={`../assets/${heroeid}.jpg`} className="img-thumbnail animate__animated animate__fadeInLeft" alt="img" />
             </div>
             <div className="col-md-8" >
                 <h3  className="center" > { superhero } </h3>
