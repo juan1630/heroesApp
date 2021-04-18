@@ -1,22 +1,40 @@
-import React from 'react'
-import { heroes } from '../../data/heroes'
+import React, { useMemo } from 'react';
+
+import queryString from 'query-string';
+
 import { HeroeCard } from '../heroes/HeroeCard';
 import { useForm } from '../../hooks/useForm'
+import { useLocation } from 'react-router';
+import { getHeroeByName } from '../../selectors/getHeroByName';
 
-export  const SearchScreen = () => {
+export  const SearchScreen = ({history}) => {
 
-    const heroesFiltered = heroes;
+    const  location = useLocation();
+    
+    const { q = "" } = queryString.parse( location.search );
+    
     const [formValues, handleInputChange] = useForm({
-        searchText: ""
+        searchText: q
     })
-
+    
     const {  searchText } = formValues;
 
+    
+    // este hook se dispara cuando el valor cambia, en este caso de q
+    const heroesFiltered = useMemo( ()=> {
+       return getHeroeByName( q )
+    }, [q] );
+
+
+    
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(searchText)
+        
+        history.push(`?q=${searchText}`);
+        
+        
     }
-
+    
     return (
         <div>
             <h2 className="text-center" > Search Screen  </h2>
@@ -48,6 +66,25 @@ export  const SearchScreen = () => {
                     <h4>
                         Results
                     </h4>
+
+                        {
+                            (q === "") 
+                                &&                         
+                                
+                                <div className="alert alert-info">
+                                    Search a hero
+                                </div>
+
+                        }
+
+                        {
+                            ( q !== '' && heroesFiltered.length === 0  )
+                                &&
+                                <div className="alert alert-danger" >
+                                        There is not a hero with  { q }
+                                </div>
+                        }
+
                     <hr />
                     {
                         heroesFiltered.map( hero => (
