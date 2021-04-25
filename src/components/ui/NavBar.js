@@ -20,6 +20,7 @@ export const Navbar = () => {
 
      const handleClick = () => {
         
+        // primero se ejecutan las fucniones asincronas y despues el replace
         dispatch({
             type: types.logout
         });
