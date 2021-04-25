@@ -5,6 +5,7 @@
     export const LoginScreen = ({history}) => {
     
 
+        // extraemos el dispatch del reducer para
         const  {dispatch}   = useContext(AuthContext);
 
 
