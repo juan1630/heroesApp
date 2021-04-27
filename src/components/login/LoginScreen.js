@@ -11,9 +11,9 @@
 
         const handleClick = ( ) => {
             // hacemos destructuracion de props que trae por defecto y entramos al objeto history
+            
 
-           // history.push('/')
-         
+            const lastPath = localStorage.getItem('lastPath') || "/"
 
             dispatch({
                 type: types.login,
@@ -22,7 +22,7 @@
                 }
             });
 
-           history.replace("/")
+           history.replace(lastPath)
 
         } 
 
