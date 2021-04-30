@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en el app router Debe de mostrar el componente de marvel si esta autenticado 1`] = `<AppRouter />`;
+
+exports[`Pruebas en el app router Debe de mostrar el login sino estoy autenticado 1`] = `<AppRouter />`;
